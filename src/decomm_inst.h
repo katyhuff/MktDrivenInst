@@ -7,6 +7,7 @@
 
 namespace decomm {
 
+typedef std::map<int, std::vector<std::string> > DecommSched;
 /// @class DecommInst
 ///
 /// This Institution is specifically designed for market-driven decommissioning
