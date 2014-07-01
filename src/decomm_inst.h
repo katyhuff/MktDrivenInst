@@ -47,50 +47,6 @@ class DecommInst : public cyclus::Institution {
   /// @warning The Prime Directive must have a space before it! (A fix will be
   /// in 2.0 ^TM)
   
-  #pragma cyclus
-
-  #pragma cyclus note {"doc": "A decomm institution is provided as a " \
-                              "skeleton for the design of new " \
-                              "institution agents."}
-
-  /// every agent should be able to print a verbose description
-  virtual std::string str();
-
-  // and away we go!
-};
-
-}  // namespace decomm
-
-#endif  // CYCLUS_DECOMMS_DECOMM_INST_H_
-
-
-
-
-// Deployinst.h
-#ifndef _DEPLOYINST_H
-#define _DEPLOYINST_H
-
-#include "cyclus.h"
-
-#include <utility>
-#include <set>
-#include <map>
-
-namespace cycamore {
-
-typedef std::map<int, std::vector<std::string> > BuildSched;
-
-///  @class DeployInst
-///  The DeployInst class inherits from the Institution
-///  class and is dynamically loaded by the Agent class when requested.
-///
-///  This agent implements a simple institution agent that deploys
-///  specific facilities as defined explicitly in the input file.
-class DeployInst : public cyclus::Institution {
- public:
-  DeployInst(cyclus::Context* ctx);
-
-  virtual ~DeployInst();
 
   #pragma cyclus decl clone
 
@@ -106,13 +62,21 @@ class DeployInst : public cyclus::Institution {
 
   #pragma cyclus def annotations
 
-  #pragma cyclus note {"doc": "An institution that owns, operates, and " \
-                              "deploys facilities manually defined in " \
-                              "the input file."}
+  #pragma cyclus note {"doc": "An institution that owns, and operates facilities "\
+                              "decommissioning them based on a material "\
+                               "availability rule in the input file."}
 
-  virtual void Build(cyclus::Agent* parent);
+  /// every agent should be able to print a verbose description
+  virtual std::string str();
 
- protected:
-  /// a collection of orders to build
-  BuildSched build_sched_;
+  // and away we go!
+  virtual void Decommission(cyclus::Agent* parent);
+  
+  protected:
+  /// a collection of orders to decommission
+  DecommSched decomm_sched_;
 };
+
+}  // namespace decomm
+
+#endif  // CYCLUS_DECOMMS_DECOMM_INST_H_
