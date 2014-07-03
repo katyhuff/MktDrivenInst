@@ -7,6 +7,11 @@
 
 namespace decomm {
 
+typedef enum buildtype_t { 
+  BUILD = 1, 
+  DECOMM = 2
+} buildtype_t;
+
 typedef std::map<int, std::vector<std::string> > DecommSched;
 /// @class DecommInst
 ///
@@ -33,51 +38,69 @@ typedef std::map<int, std::vector<std::string> > DecommSched;
 /// Place a description of the detailed behavior of the agent. Consider
 /// describing the behavior at the tick and tock as well as the behavior
 /// upon sending and receiving materials and messages.
-class DecommInst : public cyclus::Institution {
+class DecommInst : public cyclus::Institution,
+  public cyclus::toolkit::CommodityProducerManager,
+  public cyclus::toolkit::Builder {
  public:
-  /// Constructor for DecommInst Class
-  /// @param ctx the cyclus context for access to simulation-wide parameters
-  explicit  DecommInst(cyclus::Context* ctx);
+  /// Default constructor
+  DecommInst(cyclus::Context* ctx);
 
   /// every agent should be destructable
   virtual ~DecommInst();
-  
+
   /// The Prime Directive
   /// Generates code that handles all input file reading and restart operations
   /// (e.g., reading from the database, instantiating a new object, etc.).
   /// @warning The Prime Directive must have a space before it! (A fix will be
   /// in 2.0 ^TM)
-  
 
-  #pragma cyclus decl clone
+  #pragma cyclus
 
-  #pragma cyclus decl schema
-
-  #pragma cyclus decl infiletodb
-
-  #pragma cyclus decl initfromdb
-
-  #pragma cyclus decl initfromcopy
-
-  #pragma cyclus decl snapshot
-
-  #pragma cyclus def annotations
 
   #pragma cyclus note {"doc": "An institution that owns, and operates facilities "\
                               "decommissioning them based on a material "\
                                "availability rule in the input file."}
 
-  /// every agent should be able to print a verbose description
-  virtual std::string str();
+  /// enter the simulation and register any children present
+  virtual void EnterNotify();
 
-  // and away we go!
-  virtual void Decommission(cyclus::Agent* parent);
+  /// register a new child
+  virtual void BuildNotify(Agent* m);
+
+  /// unregister a child
+  virtual void DecomNotify(Agent* m);
   
-  protected:
-  /// a collection of orders to decommission
-  DecommSched decomm_sched_;
+  /// decommission a child
+  void Decommission(Agent* m);
+
+  /// decommission a child
+  void Build(Agent* m);
+
+  /// return the number to build based on availability
+  int NToBuild(double avail);
+
+  /// return the material available in the commodity of interest
+  double MaterialAvailable(cyclus::toolkit::Commodity commod);
+
+  /// Conduct action based on rule?
+  bool DecisionLogic(double avail);
+
+ private:
+  /// register a child
+  void Register_(cyclus::Agent* agent);
+
+  /// unregister a child
+  void Unregister_(cyclus::Agent* agent);
+
+  #pragma cyclus var {"tooltip": "facility prototypes", \
+                      "doc": "a facility to be managed by the institution"}
+  std::vector<std::string> prototypes;
+
+  buildtype_t buildtype;
 };
 
 }  // namespace decomm
 
 #endif  // CYCLUS_DECOMMS_DECOMM_INST_H_
+
+
