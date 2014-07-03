@@ -34,6 +34,7 @@ int DecommInst::NToBuild(double avail) {
     default :
       throw cyclus::ValueError("Incorrect buildtype: "\
           "The options are 'decommission' or 'build'.");
+      break;
     }
   } 
   // need some logic to decrement avail.
@@ -44,6 +45,8 @@ int DecommInst::NToBuild(double avail) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
   // use the commodityproducermanager to determine material available
+  double n = 0;
+  return n;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -62,17 +65,17 @@ void DecommInst::DecomNotify(Agent* m){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void Register_(cyclus::Agent* agent){
+void DecommInst::Register_(cyclus::Agent* agent){
   /// register a child
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void Unregister_(cyclus::Agent* agent){
+void DecommInst::Unregister_(cyclus::Agent* agent){
 /// unregister a child
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-bool DecisionLogic(double avail){
+bool DecommInst::DecisionLogic(double avail){
   bool d = false;
   return d;
 }
