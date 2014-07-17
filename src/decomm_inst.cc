@@ -57,21 +57,69 @@ void DecommInst::EnterNotify(){
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::BuildNotify(Agent* m){
   /// register a new child
+  Register_(m);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::DecomNotify(Agent* m){
   /// unregister a decommissioned child
+  Unregister_(m);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Register_(cyclus::Agent* agent){
   /// register a child
+  using cyclus::toolkit::CommodityProducerManager;
+  using cyclus::toolkit::Builder;
+
+  // if it's a commodity producer manager register it that way
+  CommodityProducerManager* cpm_cast =
+      dynamic_cast<CommodityProducerManager*>(agent);
+  if (cpm_cast != NULL) {
+    LOG(cyclus::LEV_INFO3, "DcmIst") << "Registering agent "
+                                   << agent->prototype() << agent->id()
+                                   << " as a commodity producer manager.";
+    sdmanager_.RegisterProducerManager(cpm_cast);
+  }
+
+  // if it's a builder, register it that way
+  Builder* b_cast = dynamic_cast<Builder*>(agent);
+  if (b_cast != NULL) {
+    LOG(cyclus::LEV_INFO3, "DcmIst") << "Registering agent "
+                                   << agent->prototype() << agent->id()
+                                   << " as a builder.";
+    buildmanager_.Register(b_cast);
+  }
+
+  // if it's one of the facilities to decommision, register that
+  cyclus::Facility* fac_cast = dynamic_cast<cyclus::Facility*>(agent);
+  if (fac_cast != NULL && agent->prototype() == target_fac) {
+    LOG(cyclus::LEV_INFO3, "DcmIst") << "Registering agent "
+                                   << agent->prototype() << agent->id()
+                                   << " as a target facility.";
+    target_facs.insert(fac_cast);
+  }
+
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Unregister_(cyclus::Agent* agent){
 /// unregister a child
+  using cyclus::toolkit::CommodityProducerManager;
+  using cyclus::toolkit::Builder;
+
+  CommodityProducerManager* cpm_cast =
+    dynamic_cast<CommodityProducerManager*>(agent);
+  if (cpm_cast != NULL)
+    sdmanager_.UnregisterProducerManager(cpm_cast);
+
+  Builder* b_cast = dynamic_cast<Builder*>(agent);
+  if (b_cast != NULL)
+    buildmanager_.Unregister(b_cast);
+
+  cyclus::Facility* fac_cast = dynamic_cast<cyclus::Facility*>(agent);
+  if (fac_cast != NULL && agent->prototype() == target_fac)
+    target_facs.erase(agent); // only pointer is deleted, not the agent
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

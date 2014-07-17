@@ -84,6 +84,12 @@ class DecommInst : public cyclus::Institution,
 
   /// Conduct action based on rule?
   bool DecisionLogic(double avail);
+  
+  /// This is a manager that keeps track of supply and demand for the commodity
+  /// of interest
+  inline cyclus::toolkit::SupplyDemandManager* sdmanager() {
+    return &sdmanager_;
+  }
 
  private:
   /// register a child
@@ -92,8 +98,22 @@ class DecommInst : public cyclus::Institution,
   /// unregister a child
   void Unregister_(cyclus::Agent* agent);
 
+  /// a list of target facilities that can be decommissioned by this inst
+  std::set<Agent*> target_facs;
+
+  /// manager for building things
+  cyclus::toolkit::BuildingManager buildmanager_;
+
+  /// manager for Supply and demand
+  cyclus::toolkit::SupplyDemandManager sdmanager_;
+
+  #pragma cyclus var {"tooltip": "facility prototype to build or decommission", \
+                      "doc": "a facility to be built or decommissioned " \
+                      "based on decision logic"}
+  std::string target_fac;
+
   #pragma cyclus var {"tooltip": "facility prototypes", \
-                      "doc": "a facility to be managed by the institution"}
+                      "doc": "facilities to be managed by the institution"}
   std::vector<std::string> prototypes;
 
   buildtype_t buildtype;
