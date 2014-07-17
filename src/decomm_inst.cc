@@ -52,6 +52,14 @@ double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::EnterNotify(){
   /// enter the simulation and register any children present
+  cyclus::Institution::EnterNotify();
+  std::set<cyclus::Agent*>::iterator it;
+  for (it = cyclus::Agent::children().begin();
+       it != cyclus::Agent::children().end();
+       ++it) {
+    Agent* a = *it;
+    Register_(a);
+  }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
