@@ -16,7 +16,23 @@ void DecommInst::Decommission(Agent* parent) {
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Tick(){}
+void DecommInst::Tick(){
+  int time = context()->time();
+  double demand = sdmanager_.Demand(commod_, time);
+  double supply = sdmanager_.Supply(commod_);
+  double unmetdemand = demand - supply;
+
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "GrowthRegion: " << prototype()
+                                 << " at time: " << time
+                                 << " has the following values regaring "
+                                 << " commodity: " << commod_.name();
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *demand = " << demand;
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *supply = " << supply;
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *unmetdemand = " << unmetdemand;
+
+  int n = NToBuild(unmetdemand);
+  cyclus::Institution::Tick();
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::EnterNotify(){
