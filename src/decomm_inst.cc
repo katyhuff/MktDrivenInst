@@ -15,6 +15,34 @@ DecommInst::~DecommInst() {}
 void DecommInst::Decommission(Agent* parent) {
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::Tick(){}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::EnterNotify(){
+  /// enter the simulation and register any children present
+  cyclus::Institution::EnterNotify();
+  std::set<cyclus::Agent*>::iterator it;
+  for (it = cyclus::Agent::children().begin();
+       it != cyclus::Agent::children().end();
+       ++it) {
+    Agent* a = *it;
+    Register_(a);
+  }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::BuildNotify(Agent* m){
+  /// register a new child
+  Register_(m);
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::DecomNotify(Agent* m){
+  /// unregister a decommissioned child
+  Unregister_(m);
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Build(Agent* parent) {
 }
@@ -47,31 +75,6 @@ double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
   // use the commodityproducermanager to determine material available
   double n = 0;
   return n;
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::EnterNotify(){
-  /// enter the simulation and register any children present
-  cyclus::Institution::EnterNotify();
-  std::set<cyclus::Agent*>::iterator it;
-  for (it = cyclus::Agent::children().begin();
-       it != cyclus::Agent::children().end();
-       ++it) {
-    Agent* a = *it;
-    Register_(a);
-  }
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::BuildNotify(Agent* m){
-  /// register a new child
-  Register_(m);
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::DecomNotify(Agent* m){
-  /// unregister a decommissioned child
-  Unregister_(m);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

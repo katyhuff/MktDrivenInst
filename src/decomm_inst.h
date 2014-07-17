@@ -61,6 +61,12 @@ class DecommInst : public cyclus::Institution,
                               "decommissioning them based on a material "\
                                "availability rule in the input file."}
 
+  /// on the tick, the institution checks the supply and demand
+  /// of the target commodity. Then, based on the decision logic,
+  /// determines the number of facilities that need to have been 
+  /// built/decommissioned 
+  virtual void Tick();
+
   /// enter the simulation and register any children present
   virtual void EnterNotify();
 
