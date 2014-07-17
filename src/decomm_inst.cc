@@ -17,15 +17,18 @@ void DecommInst::Decommission(Agent* parent) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Tick(){
+  using cyclus::toolkit::Commodity;
+  
+  Commodity commod = Commodity(target_commod);
   int time = context()->time();
-  double demand = sdmanager_.Demand(commod_, time);
-  double supply = sdmanager_.Supply(commod_);
+  double demand = sdmanager_.Demand(commod, time);
+  double supply = sdmanager_.Supply(commod);
   double unmetdemand = demand - supply;
 
-  LOG(cyclus::LEV_INFO3, "DcmIst") << "GrowthRegion: " << prototype()
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "DecommInst: " << prototype()
                                  << " at time: " << time
                                  << " has the following values regaring "
-                                 << " commodity: " << commod_.name();
+                                 << " commodity: " << target_commod;
   LOG(cyclus::LEV_INFO3, "DcmIst") << "  *demand = " << demand;
   LOG(cyclus::LEV_INFO3, "DcmIst") << "  *supply = " << supply;
   LOG(cyclus::LEV_INFO3, "DcmIst") << "  *unmetdemand = " << unmetdemand;

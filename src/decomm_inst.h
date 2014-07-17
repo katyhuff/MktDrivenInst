@@ -118,6 +118,16 @@ class DecommInst : public cyclus::Institution,
                       "based on decision logic"}
   std::string target_fac;
 
+  #pragma cyclus var {"tooltip": "number of facilities to build (negative "\
+                      "to decommision)", \
+                      "doc": "number of facilities to build/decomm at a time."}
+  int num_to_build;
+
+  #pragma cyclus var {"tooltip": "the commodity on which to base the logic", \
+                      "doc": "The commodity for which supply/demand determines "\
+                      "builds/decommissionings."}
+  std::string target_commod;
+
   #pragma cyclus var {"tooltip": "facility prototypes", \
                       "doc": "facilities to be managed by the institution"}
   std::vector<std::string> prototypes;
