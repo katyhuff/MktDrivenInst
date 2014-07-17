@@ -71,19 +71,8 @@ int DecommInst::NToBuild(double avail) {
   // convert material availability to a number of facilities to build.
   int n = 0;
   if (DecisionLogic(avail)) {
-    switch (buildtype) {
-    case DECOMM :
-      n -= 1;
-      break;
-    case BUILD :
-      n += 1;
-      break;
-    default :
-      throw cyclus::ValueError("Incorrect buildtype: "\
-          "The options are 'decommission' or 'build'.");
-      break;
-    }
-  } 
+    n += num_to_build;
+  }
   // need some logic to decrement avail.
   
   return n;
