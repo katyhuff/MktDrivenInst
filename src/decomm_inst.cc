@@ -11,10 +11,6 @@ DecommInst::DecommInst(cyclus::Context* ctx)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 DecommInst::~DecommInst() {}
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Decommission(Agent* parent) {
-}
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Tick(){
   using cyclus::toolkit::Commodity;
@@ -44,17 +40,6 @@ void DecommInst::Tick(){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Decommission(int n){
-  n = abs(n);
-  std::set<cyclus::Agent*>::iterator next;
-  for (int i = 0; i < n; ++i ){
-    next = target_facs.begin();
-    Decommission(*next);
-    target_facs.erase(next);
-  }
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::EnterNotify(){
   /// enter the simulation and register any children present
   cyclus::Institution::EnterNotify();
@@ -77,6 +62,21 @@ void DecommInst::BuildNotify(Agent* m){
 void DecommInst::DecomNotify(Agent* m){
   /// unregister a decommissioned child
   Unregister_(m);
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::Decommission(Agent* parent) {
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::Decommission(int n){
+  n = abs(n);
+  std::set<cyclus::Agent*>::iterator next;
+  for (int i = 0; i < n; ++i ){
+    next = target_facs.begin();
+    Decommission(*next);
+    target_facs.erase(next);
+  }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
