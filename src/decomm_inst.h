@@ -79,11 +79,17 @@ class DecommInst : public cyclus::Institution,
   /// decommission a child
   void Decommission(Agent* m);
 
-  /// decommission a child
-  void Build(Agent* m);
+  /// decommission a number of children
+  void Decommission(int n);
+
+  /// schedule the builds for a number of children
+  void Build(int n);
 
   /// return the number to build based on availability
   int NToBuild(double avail);
+  
+  /// if negative, decommission, if positive, build, else do nothing
+  void BuildOrDecomm(int n);
 
   /// return the material available in the commodity of interest
   double MaterialAvailable(cyclus::toolkit::Commodity commod);
@@ -105,7 +111,7 @@ class DecommInst : public cyclus::Institution,
   void Unregister_(cyclus::Agent* agent);
 
   /// a list of target facilities that can be decommissioned by this inst
-  std::set<Agent*> target_facs;
+  std::set<cyclus::Agent*> target_facs;
 
   /// manager for building things
   cyclus::toolkit::BuildingManager buildmanager_;

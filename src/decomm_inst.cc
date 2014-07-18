@@ -34,7 +34,24 @@ void DecommInst::Tick(){
   LOG(cyclus::LEV_INFO3, "DcmIst") << "  *unmetdemand = " << unmetdemand;
 
   int n = NToBuild(unmetdemand);
+
+  if( n < 0 ) {
+    Decommission(n);
+  } else if (n > 0) {
+    Build(n);
+  }
   cyclus::Institution::Tick();
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+void DecommInst::Decommission(int n){
+  n = abs(n);
+  std::set<cyclus::Agent*>::iterator next;
+  for (int i = 0; i < n; ++i ){
+    next = target_facs.begin();
+    Decommission(*next);
+    target_facs.erase(next);
+  }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -63,7 +80,10 @@ void DecommInst::DecomNotify(Agent* m){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Build(Agent* parent) {
+void DecommInst::Build(int n) {
+  for( int i = 0; i != n; ++i ){
+    context()->SchedBuild(this, target_fac);
+  }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -129,16 +149,19 @@ void DecommInst::Unregister_(cyclus::Agent* agent){
 
   CommodityProducerManager* cpm_cast =
     dynamic_cast<CommodityProducerManager*>(agent);
-  if (cpm_cast != NULL)
+  if (cpm_cast != NULL){
     sdmanager_.UnregisterProducerManager(cpm_cast);
+  }
 
   Builder* b_cast = dynamic_cast<Builder*>(agent);
-  if (b_cast != NULL)
+  if (b_cast != NULL){
     buildmanager_.Unregister(b_cast);
+  }
 
   cyclus::Facility* fac_cast = dynamic_cast<cyclus::Facility*>(agent);
-  if (fac_cast != NULL && agent->prototype() == target_fac)
-    target_facs.erase(agent); // only pointer is deleted, not the agent
+  if (fac_cast != NULL && agent->prototype() == target_fac){
+    target_facs.erase(agent); 
+  }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
