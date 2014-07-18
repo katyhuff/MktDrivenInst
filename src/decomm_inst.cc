@@ -65,7 +65,8 @@ void DecommInst::DecomNotify(Agent* m){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Decommission(Agent* parent) {
+void DecommInst::Decommission(Agent* to_decomm) {
+  context()->SchedDecom(to_decomm, context()->time() + 1);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,7 +75,6 @@ void DecommInst::Decommission(int n){
   std::set<cyclus::Agent*>::iterator next;
   for (int i = 0; i < n; ++i ){
     next = target_facs.begin();
-    Decommission(*next);
     target_facs.erase(next);
   }
 }
@@ -82,7 +82,7 @@ void DecommInst::Decommission(int n){
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Build(int n) {
   for( int i = 0; i != n; ++i ){
-    context()->SchedBuild(this, target_fac);
+    context()->SchedBuild(this, target_fac, context()->time() + 1);
   }
 }
 
