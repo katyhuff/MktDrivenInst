@@ -14,12 +14,23 @@ class DecommInstTest : public ::testing::Test {
  protected:
   cyclus::TestContext tc_;
   DecommInst* src_inst_;
-
+  std::string target_commod, target_fac;
+  int num_to_build;
+  std::vector<std::string> prototypes;
   virtual void SetUp() {
+    InitParameters();
     src_inst_ = new DecommInst(tc_.get());
   }
 
   virtual void TearDown() {}
+
+  void InitParameters() {
+    target_fac = "BatchReactor";
+    target_commod = "fresh_sfr_fuel";
+    prototypes.push_back("target_fac");
+    num_to_build = 2;
+    cyclus::Context* ctx = tc_.get();
+  }
 };
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -31,6 +42,9 @@ TEST_F(DecommInstTest, clone) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 TEST_F(DecommInstTest, InitialState) {
   // Test things about the initial state of the inst here
+  EXPECT_EQ("", src_inst_->target_fac_());
+  EXPECT_EQ("", src_inst_->target_commod_()); 
+  EXPECT_EQ(0, src_inst_->num_to_build_()); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

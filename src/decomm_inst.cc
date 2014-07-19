@@ -6,7 +6,11 @@ enum buildtype_t { BUILD = 1, DECOMM = 2};
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 DecommInst::DecommInst(cyclus::Context* ctx)
-    : cyclus::Institution(ctx) {};
+    : cyclus::Institution(ctx),
+    target_commod(""),
+    target_fac(""),
+    num_to_build(0){
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 DecommInst::~DecommInst() {}
