@@ -127,6 +127,8 @@ class DecommInst : public cyclus::Institution,
   /// manager for Supply and demand
   cyclus::toolkit::SupplyDemandManager sdmanager_;
 
+  int n_built;
+
   #pragma cyclus var {"tooltip": "facility prototype to build or decommission", \
                       "doc": "a facility to be built or decommissioned " \
                       "based on decision logic"}
@@ -146,7 +148,12 @@ class DecommInst : public cyclus::Institution,
                       "doc": "facilities to be managed by the institution"}
   std::vector<std::string> prototypes;
 
-  buildtype_t buildtype;
+
+  #pragma cyclus var {"tooltip": "Amount of material required for decision logic", \
+                      "doc": "Amount required for decision logic"}
+  double amt_req;
+
+
 };
 
 }  // namespace decomm

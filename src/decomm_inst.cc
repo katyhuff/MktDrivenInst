@@ -1,16 +1,16 @@
 #include "decomm_inst.h"
 
 using decomm::DecommInst;
-enum buildtype_t { BUILD = 1, DECOMM = 2};
-
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 DecommInst::DecommInst(cyclus::Context* ctx)
     : cyclus::Institution(ctx),
     target_commod(""),
     target_fac(""),
-    num_to_build(0){
-      sdmanager_ = cyclus::toolkit::SupplyDemandManager(); 
+    num_to_build(0),
+    amt_req(0),
+    n_built(0) {
+    //  sdmanager_ = cyclus::toolkit::SupplyDemandManager(); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -19,29 +19,24 @@ DecommInst::~DecommInst() {}
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void DecommInst::Tick(){
   using cyclus::toolkit::Commodity;
-  
+ 
   Commodity commod = Commodity(target_commod);
-  int time = context()->time();
-//  double demand = sdmanager_.Demand(commod, time);
-  double demand = 2;
-  double supply = sdmanager_.Supply(commod);
-//  double unmetdemand = demand - supply;
-//
-//  LOG(cyclus::LEV_INFO3, "DcmIst") << "DecommInst: " << prototype()
-//                                 << " at time: " << time
-//                                 << " has the following values regaring "
-//                                 << " commodity: " << target_commod;
-//  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *demand = " << demand;
-//  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *supply = " << supply;
-//  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *unmetdemand = " << unmetdemand;
-//
-//  int n = NToBuild(unmetdemand);
-//
-//  if( n < 0 ) {
-//    Decommission(n);
-//  } else if (n > 0) {
-//    Build(n);
-//  }
+
+  double mat_avail = MaterialAvailable(commod);
+
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "DecommInst: " << prototype()
+                                 << " at time: " << context()->time()
+                                 << " has the following values regarding "
+                                 << " commodity: " << target_commod;
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *mat_avail = " << mat_avail;
+
+  int n = NToBuild(mat_avail);
+
+  if( n < 0 ) {
+    Decommission(n);
+  } else if (n > 0) {
+    Build(n);
+  }
   cyclus::Institution::Tick();
 }
 
@@ -107,8 +102,11 @@ int DecommInst::NToBuild(double avail) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
   // use the commodityproducermanager to determine material available
-  double n = 0;
-  return n;
+  double amt = 0;
+  double demand = n_built*amt_req;
+  double supply = sdmanager_.Supply(commod);
+  amt = demand - supply;
+  return amt;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
