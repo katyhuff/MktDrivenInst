@@ -37,6 +37,8 @@ void DecommInst::Tick(){
   } else if (n > 0) {
     Build(n);
   }
+
+  n_built += n;
   cyclus::Institution::Tick();
 }
 

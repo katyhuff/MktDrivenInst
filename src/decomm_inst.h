@@ -7,11 +7,6 @@
 
 namespace decomm {
 
-typedef enum buildtype_t { 
-  BUILD = 1, 
-  DECOMM = 2
-} buildtype_t;
-
 typedef std::map<int, std::vector<std::string> > DecommSched;
 /// @class DecommInst
 ///
@@ -88,9 +83,6 @@ class DecommInst : public cyclus::Institution,
   /// return the number to build based on availability
   int NToBuild(double avail);
   
-  /// if negative, decommission, if positive, build, else do nothing
-  void BuildOrDecomm(int n);
-
   /// return the material available in the commodity of interest
   double MaterialAvailable(cyclus::toolkit::Commodity commod);
 
