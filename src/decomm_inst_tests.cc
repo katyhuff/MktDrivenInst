@@ -91,13 +91,12 @@ TEST_F(DecommInstTest, Tick) {
   // For a situation where no material is required, num_to_build should be built
   EXPECT_NO_THROW(param_inst_->Tick());
   EXPECT_EQ(num_to_build, param_inst_->n_built_()); 
-  
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 TEST_F(DecommInstTest, Tock) {
   int time = 1;
-  EXPECT_NO_THROW(src_inst_->Tick());
+  EXPECT_NO_THROW(src_inst_->Tock());
   // Test DecommInst specific behaviors of the handleTock function here
 }
 } // namespace decomm
