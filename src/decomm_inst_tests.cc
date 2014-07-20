@@ -25,6 +25,9 @@ class DecommInstTest : public ::testing::Test {
     src_inst_ = new DecommInst(tc_.get());
     param_inst_ = new DecommInst(tc_.get());
     param_inst_->target_fac = target_fac;
+    param_inst_->target_commod = target_commod;
+    param_inst_->num_to_build = num_to_build;
+    param_inst_->amt_req = amt_req;
   }
 
   virtual void TearDown() {}
@@ -34,7 +37,7 @@ class DecommInstTest : public ::testing::Test {
     target_commod = "fresh_sfr_fuel";
     prototypes.push_back("target_fac");
     num_to_build = 2;
-    amt_req = 10.0;
+    amt_req = 0.0;
     cyclus::Context* ctx = tc_.get();
   }
 
@@ -70,6 +73,7 @@ TEST_F(DecommInstTest, InitialState) {
   EXPECT_EQ(0, src_inst_->num_to_build_()); 
   EXPECT_EQ(0, src_inst_->n_built_()); 
   EXPECT_EQ(0, src_inst_->amt_req_()); 
+  EXPECT_EQ(0, src_inst_->prototypes_().size()); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -83,6 +87,11 @@ TEST_F(DecommInstTest, Tick) {
   int time = 1;
   EXPECT_NO_THROW(src_inst_->Tick());
   // Test DecommInst specific behaviors of the handleTick function here
+  EXPECT_EQ(0, src_inst_->n_built_()); 
+  // For a situation where no material is required, num_to_build should be built
+  EXPECT_NO_THROW(param_inst_->Tick());
+  EXPECT_EQ(num_to_build, param_inst_->n_built_()); 
+  
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
