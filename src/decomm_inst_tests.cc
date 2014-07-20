@@ -35,8 +35,14 @@ class DecommInstTest : public ::testing::Test {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 TEST_F(DecommInstTest, clone) {
-  DecommInst* cloned_fac =
+  DecommInst* cloned_inst =
       dynamic_cast<DecommInst*> (src_inst_->Clone());
+
+  EXPECT_EQ("", cloned_inst->target_fac_());
+  EXPECT_EQ("", cloned_inst->target_commod_()); 
+  EXPECT_EQ(0, cloned_inst->num_to_build_()); 
+  EXPECT_EQ(0, cloned_inst->n_built_()); 
+  EXPECT_EQ(0, cloned_inst->amt_req_()); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
