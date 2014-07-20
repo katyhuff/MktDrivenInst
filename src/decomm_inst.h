@@ -103,6 +103,10 @@ class DecommInst : public cyclus::Institution,
 
   inline std::vector<std::string> prototypes_(){return prototypes;};
 
+  inline int n_built_(){return n_built;};
+
+  inline double amt_req_(){return amt_req;};
+
  private:
   /// register a child
   void Register_(cyclus::Agent* agent);

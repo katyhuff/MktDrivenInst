@@ -45,6 +45,8 @@ TEST_F(DecommInstTest, InitialState) {
   EXPECT_EQ("", src_inst_->target_fac_());
   EXPECT_EQ("", src_inst_->target_commod_()); 
   EXPECT_EQ(0, src_inst_->num_to_build_()); 
+  EXPECT_EQ(0, src_inst_->n_built_()); 
+  EXPECT_EQ(0, src_inst_->amt_req_()); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
