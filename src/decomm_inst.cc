@@ -10,6 +10,7 @@ DecommInst::DecommInst(cyclus::Context* ctx)
     target_commod(""),
     target_fac(""),
     num_to_build(0){
+      sdmanager_ = cyclus::toolkit::SupplyDemandManager(); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -21,25 +22,26 @@ void DecommInst::Tick(){
   
   Commodity commod = Commodity(target_commod);
   int time = context()->time();
-  double demand = sdmanager_.Demand(commod, time);
+//  double demand = sdmanager_.Demand(commod, time);
+  double demand = 2;
   double supply = sdmanager_.Supply(commod);
-  double unmetdemand = demand - supply;
-
-  LOG(cyclus::LEV_INFO3, "DcmIst") << "DecommInst: " << prototype()
-                                 << " at time: " << time
-                                 << " has the following values regaring "
-                                 << " commodity: " << target_commod;
-  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *demand = " << demand;
-  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *supply = " << supply;
-  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *unmetdemand = " << unmetdemand;
-
-  int n = NToBuild(unmetdemand);
-
-  if( n < 0 ) {
-    Decommission(n);
-  } else if (n > 0) {
-    Build(n);
-  }
+//  double unmetdemand = demand - supply;
+//
+//  LOG(cyclus::LEV_INFO3, "DcmIst") << "DecommInst: " << prototype()
+//                                 << " at time: " << time
+//                                 << " has the following values regaring "
+//                                 << " commodity: " << target_commod;
+//  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *demand = " << demand;
+//  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *supply = " << supply;
+//  LOG(cyclus::LEV_INFO3, "DcmIst") << "  *unmetdemand = " << unmetdemand;
+//
+//  int n = NToBuild(unmetdemand);
+//
+//  if( n < 0 ) {
+//    Decommission(n);
+//  } else if (n > 0) {
+//    Build(n);
+//  }
   cyclus::Institution::Tick();
 }
 
