@@ -107,7 +107,7 @@ double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
   double amt = 0;
   double demand = n_built*amt_req;
   double supply = sdmanager_.Supply(commod);
-  amt = demand - supply;
+  amt = supply - demand;
   return amt;
 }
 
@@ -173,6 +173,9 @@ void DecommInst::Unregister_(cyclus::Agent* agent){
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool DecommInst::DecisionLogic(double avail){
   bool d = false;
+  if( avail >= amt_req) {
+    d = true;
+  }
   return d;
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
