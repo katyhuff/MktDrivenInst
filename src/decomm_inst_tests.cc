@@ -9,17 +9,22 @@
 
 using decomm::DecommInst;
 
+namespace decomm {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class DecommInstTest : public ::testing::Test {
  protected:
   cyclus::TestContext tc_;
   DecommInst* src_inst_;
+  DecommInst* param_inst_;
   std::string target_commod, target_fac;
   int num_to_build;
+  double amt_req;
   std::vector<std::string> prototypes;
   virtual void SetUp() {
     InitParameters();
     src_inst_ = new DecommInst(tc_.get());
+    param_inst_ = new DecommInst(tc_.get());
+    param_inst_->target_fac = target_fac;
   }
 
   virtual void TearDown() {}
@@ -29,8 +34,10 @@ class DecommInstTest : public ::testing::Test {
     target_commod = "fresh_sfr_fuel";
     prototypes.push_back("target_fac");
     num_to_build = 2;
+    amt_req = 10.0;
     cyclus::Context* ctx = tc_.get();
   }
+
 };
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -43,6 +50,16 @@ TEST_F(DecommInstTest, clone) {
   EXPECT_EQ(0, cloned_inst->num_to_build_()); 
   EXPECT_EQ(0, cloned_inst->n_built_()); 
   EXPECT_EQ(0, cloned_inst->amt_req_()); 
+
+  DecommInst* cloned_param_inst = 
+      dynamic_cast<DecommInst*> (param_inst_->Clone());
+
+  EXPECT_EQ(target_fac, cloned_param_inst->target_fac_());
+  EXPECT_EQ(target_commod, cloned_param_inst->target_commod_()); 
+  EXPECT_EQ(num_to_build, cloned_param_inst->num_to_build_()); 
+  EXPECT_EQ(0, cloned_param_inst->n_built_()); 
+  EXPECT_EQ(amt_req, cloned_param_inst->amt_req_()); 
+
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,6 +91,7 @@ TEST_F(DecommInstTest, Tock) {
   EXPECT_NO_THROW(src_inst_->Tick());
   // Test DecommInst specific behaviors of the handleTock function here
 }
+} // namespace decomm
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* DecommInstitutionConstructor(cyclus::Context* ctx) {

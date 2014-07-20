@@ -107,7 +107,7 @@ class DecommInst : public cyclus::Institution,
 
   inline double amt_req_(){return amt_req;};
 
- private:
+ protected:
   /// register a child
   void Register_(cyclus::Agent* agent);
 
@@ -149,6 +149,7 @@ class DecommInst : public cyclus::Institution,
                       "doc": "Amount required for decision logic"}
   double amt_req;
 
+  friend class DecommInstTest;
 
 };
 
