@@ -1,8 +1,8 @@
 <simulation>
   <control>
-    <duration>10</duration>
+    <duration>1200</duration>
     <startmonth>1</startmonth>
-    <startyear>2000</startyear>
+    <startyear>2014</startyear>
   </control>
 
   <archetypes>
@@ -14,27 +14,241 @@
   <facility>
     <name>OneFacility</name>
     <config>
-      <Source/>
+      <Source>
+        <out_commod>10.0</out_commod>
+        <recipe_name>lwr_fresh_fuel</recipe_name>
+      </Source>
     </config>
   </facility>
 
   <region>
-    <name>OneRegion</name>
+    <name>SingleRegion</name>
     <config>
-      <GrowthRegion/>
+      <GrowthRegion>
+        <commodity_name>power</commodity_name>
+        <demand_types>
+          <val>linear</val>
+        </demand_types>
+        <demand_params>
+          <val>1 1</val>
+        </demand_params>
+        <demand_times>
+          <val>1 1</val>
+        </demand_times>
+      </GrowthRegion>
     </config>
     <institution>
-      <name>OneInst</name>
+      <name>SingleInstitution</name>
       <initialfacilitylist>
         <entry>
-          <prototype>OneFacility</prototype>
+          <prototype>Mine</prototype>
           <number>1</number>
+        </entry>
+        <entry>
+          <prototype>Enrichment</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>LWRFuelFab</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>SFRFuelFab</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>LWRWetStorage</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>SFRWetStorage</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>LWRSeparations</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>SFRSeparations</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>Enrichment</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>LWR</prototype>
+          <number>100</number>
         </entry>
       </initialfacilitylist>
       <config>
-        <DecommInst/>
+        <ManagerInst>
+          <prototypes>
+            <val>Mine</val>
+            <val>Enrichment</val>
+            <val>LWRFuelFab</val>
+            <val>SFRFuelFab</val>
+            <val>LWR</val>
+            <val>SFR</val>
+            <val>LWRWetStorage</val>
+            <val>SFRWetStorage</val>
+            <val>LWRSeparations</val>
+            <val>SFRSeparations</val>
+          </prototypes>
+        </ManagerInst>
       </config>
     </institution>
   </region>
 
-</simulation>
+
+
+
+e>
+    <name>nat_u_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>0.711</comp>
+    </isotope>
+    <isotope>
+      <id>92238</id>
+      <comp>99.289</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>leu_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>4.3</comp>
+    </isotope>
+    <isotope>
+      <id>92238</id>
+      <comp>95.7</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>dep_u_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>0.25</comp>
+    </isotope>
+    <isotope>
+      <id>92238</id>
+      <comp>99.75</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>fresh_lwr_fuel_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>4.3</comp>
+    </isotope>
+    <isotope>
+      <id>92235</id>
+      <comp>95.7</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>fresh_sfr_fuel_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>86.13</comp>
+    </isotope>
+    <isotope>
+      <id>94239</id>
+      <comp>13.87</comp>
+    </isotope>
+    <isotope>
+      <id>95241</id>
+      <comp>0.48</comp>
+    </isotope>
+    <isotope>
+      <id>43099</id>
+      <comp>0</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>lwr_unf_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>93.44</comp>
+    </isotope>
+    <isotope>
+      <id>94239</id>
+      <comp>1.20</comp>
+    </isotope>
+    <isotope>
+      <id>95241</id>
+      <comp>0.1</comp>
+    </isotope>
+    <isotope>
+      <id>43099</id>
+      <comp>5.26</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>sfr_unf_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>78.30</comp>
+    </isotope>
+    <isotope>
+      <id>94239</id>
+      <comp>13.56</comp>
+    </isotope>
+    <isotope>
+      <id>95241</id>
+      <comp>0.48</comp>
+    </isotope>
+    <isotope>
+      <id>43099</id>
+      <comp>7.66</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>rep_sfr_tru_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>94239</id>
+      <comp>13.56</comp>
+    </isotope>
+    <isotope>
+      <id>95241</id>
+      <comp>0.48</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>rep_lwr_tru_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>94239</id>
+      <comp>1.20</comp>
+    </isotope>
+    <isotope>
+      <id>95241</id>
+      <comp>0.1</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>rep_sfr_u_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>78.30</comp>
+    </isotope>
+  </recipe>
+  <recipe>
+    <name>rep_lwr_u_recipe</name>
+    <basis>mass</basis>
+    <isotope>
+      <id>92235</id>
+      <comp>93.44</comp>
+    </isotope>
+  </recipe>
+
