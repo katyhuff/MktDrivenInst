@@ -19,6 +19,10 @@
       <name>GrowthRegion</name>
     </spec>
     <spec>
+      <lib>cycamore</lib>
+      <name>BatchReactor</name>
+    </spec>
+    <spec>
       <path>decomm</path>
       <lib>DecommInst</lib>
       <name>DecommInst</name>
@@ -102,7 +106,6 @@
 
   <facility>
     <name>LWR</name>
-    <lifetime>1</lifetime>
     <config>
       <BatchReactor>
         <fuel>
@@ -121,8 +124,6 @@
         </commodity_production>
       </BatchReactor>
     </config>
-    <incommodity>fresh_lwr_fuel</incommodity>
-    <outcommodity>lwr_unf</outcommodity>
   </facility>
 
   <facility>
@@ -146,14 +147,12 @@
         </commodity_production>
       </BatchReactor>
     </config>
-    <incommodity>fresh_sfr_fuel</incommodity>
-    <outcommodity>sfr_unf</outcommodity>
   </facility>
 
   <facility>
     <name>LWRWetStorage</name>
     <config>
-      <CommodConverter>
+      <CommodconverterFacility>
         <commod_pair>
           <incommodity>lwr_unf</incommodity>
           <inrecipe>lwr_unf_recipe</inrecipe>
@@ -166,7 +165,7 @@
           <capacity>1000.0</capacity>
           <cost>0.0</cost>
         </commodity_production>
-      </CommodConverter>
+      </CommodconverterFacility>
     </config>
     <incommodity>lwr_unf</incommodity>
     <outcommodity>lwr_unf_fuel</outcommodity>
@@ -175,7 +174,7 @@
   <facility>
     <name>SFRWetStorage</name>
     <config>
-      <CommodConverter>
+      <CommodconverterFacility>
         <commod_pair>
           <incommodity>sfr_unf</incommodity>
           <inrecipe>sfr_unf_recipe</inrecipe>
@@ -188,7 +187,7 @@
           <capacity>1000.0</capacity>
           <cost>0.0</cost>
         </commodity_production>
-      </CommodConverter>
+      </CommodconverterFacility>
     </config>
     <incommodity>sfr_unf</incommodity>
     <outcommodity>sfr_unf_fuel</outcommodity>
