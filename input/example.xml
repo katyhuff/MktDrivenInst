@@ -24,6 +24,11 @@
       <name>DecommInst</name>
     </spec>
     <spec>
+      <path>streamblender</path>
+      <lib>StreamblenderFacility</lib>
+      <name>StreamblenderFacility</name>
+    </spec>
+    <spec>
       <path>commodconverter</path>
       <lib>CommodconverterFacility</lib>
       <name>CommodconverterFacility</name>
@@ -61,13 +66,8 @@
         <in_recipe>leu_recipe</in_recipe>
         <out_commod>fresh_lwr_fuel</out_commod>
         <out_recipe>fresh_lwr_fuel_recipe</out_recipe>
-        <processtime>12</processtime>
-        <capacity>100.0</capacity>
-        <commodity_production>
-          <commodity>fresh_lwr_fuel</commodity>
-          <capacity>10000.0</capacity>
-          <cost>10000.0</cost>
-        </commodity_production>
+        <process_time>12</process_time>
+        <max_inv_size>100.0</max_inv_size>
       </CommodconverterFacility>
     </config>
   </facility>
@@ -75,31 +75,23 @@
   <facility>
     <name>SFRFuelFab</name>
     <config>
-      <FCOFuelFab>
-        <inpair>
-          <incommodity>rep_sfr_tru</incommodity>
-          <inrecipe>rep_sfr_tru_recipe</inrecipe>
-        </inpair>
-        <inpair>
-          <incommodity>rep_lwr_tru</incommodity>
-          <inrecipe>rep_lwr_tru_recipe</inrecipe>
-        </inpair>
-        <inpair>
-          <incommodity>rep_sfr_u</incommodity>
-          <inrecipe>rep_sfr_u_recipe</inrecipe>
-        </inpair>
-        <inpair>
-          <incommodity>nat_u</incommodity>
-          <inrecipe>nat_u_recipe</inrecipe>
-        </inpair>
-        <inpair>
-          <incommodity>dep_u</incommodity>
-          <inrecipe>dep_u_recipe</inrecipe>
-        </inpair>
-        <outpair>
-          <outcommodity>fresh_sfr_fuel</outcommodity>
-          <outrecipe>fresh_sfr_fuel_recipe</outrecipe>
-        </outpair>
+      <StreamblenderFacility>
+        <in_commods>
+          <val>rep_sfr_tru</val>
+          <val>rep_lwr_tru</val>
+          <val>rep_sfr_u</val>
+          <val>nat_u</val>
+          <val>dep_u</val>
+        </in_commods>
+        <out_commod>fresh_sfr_fuel</out_commod>
+        <out_recipe>fresh_sfr_fuel_recipe</out_recipe>
+        <in_recipes>
+          <val>rep_sfr_tru_recipe</val>
+          <val>rep_lwr_tru_recipe</val>
+          <val>rep_sfr_u_recipe</val>
+          <val>nat_u_recipe</val>
+          <val>dep_u_recipe</val>
+        </in_recipes>
         <preflist>
           <prefiso>94240</prefiso>
           <sourcecommod>rep_sfr_tru</sourcecommod>
@@ -118,7 +110,7 @@
           <capacity>10000.0</capacity>
           <cost>10000.0</cost>
         </commodity_production>
-      </FCOFuelFab>
+      </StreamblenderFacility>
     </config>
     <incommodity>rep_sfr_tru</incommodity>
     <incommodity>rep_lwr_tru</incommodity>
