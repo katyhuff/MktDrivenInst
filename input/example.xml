@@ -56,13 +56,11 @@
   <facility>
     <name>LWRFuelFab</name>
     <config>
-      <CommodConverter>
-        <commod_pair>
-          <incommodity>leu</incommodity>
-          <inrecipe>leu_recipe</inrecipe>
-          <outcommodity>fresh_lwr_fuel</outcommodity>
-          <outrecipe>fresh_lwr_fuel_recipe</outrecipe>
-        </commod_pair>
+      <CommodconverterFacility>
+        <in_commod>leu</in_commod>
+        <in_recipe>leu_recipe</in_recipe>
+        <out_commod>fresh_lwr_fuel</out_commod>
+        <out_recipe>fresh_lwr_fuel_recipe</out_recipe>
         <processtime>12</processtime>
         <capacity>100.0</capacity>
         <commodity_production>
@@ -70,7 +68,7 @@
           <capacity>10000.0</capacity>
           <cost>10000.0</cost>
         </commodity_production>
-      </CommodConverter>
+      </CommodconverterFacility>
     </config>
   </facility>
 
