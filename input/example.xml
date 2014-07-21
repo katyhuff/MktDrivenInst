@@ -6,22 +6,22 @@
   </control>
 
   <archetypes>
-    <spec><path>decomm</path><lib>DecommFacility</lib><name>DecommFacility</name></spec>
-    <spec><path>decomm</path><lib>DecommRegion</lib><name>DecommRegion</name></spec>
+    <spec><lib>cycamore</lib><name>Source</name></spec>
+    <spec><lib>cycamore</lib><name>GrowthRegion</name></spec>
     <spec><path>decomm</path><lib>DecommInst</lib><name>DecommInst</name></spec>
   </archetypes>
 
   <facility>
     <name>OneFacility</name>
     <config>
-      <DecommFacility />
+      <Source/>
     </config>
   </facility>
 
   <region>
     <name>OneRegion</name>
     <config>
-      <DecommRegion />
+      <GrowthRegion/>
     </config>
     <institution>
       <name>OneInst</name>
@@ -32,7 +32,7 @@
         </entry>
       </initialfacilitylist>
       <config>
-        <DecommInst />
+        <DecommInst/>
       </config>
     </institution>
   </region>
