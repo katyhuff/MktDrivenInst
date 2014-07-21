@@ -153,44 +153,28 @@
     <name>LWRWetStorage</name>
     <config>
       <CommodconverterFacility>
-        <commod_pair>
-          <incommodity>lwr_unf</incommodity>
-          <inrecipe>lwr_unf_recipe</inrecipe>
-          <outcommodity>lwr_unf_cool</outcommodity>
-          <outrecipe>lwr_unf_recipe</outrecipe>
-        </commod_pair>
-        <processtime>48</processtime>
-        <commodity_production>
-          <commodity>lwr_unf_recipe</commodity>
-          <capacity>1000.0</capacity>
-          <cost>0.0</cost>
-        </commodity_production>
+        <in_commod>lwr_unf</in_commod>
+        <in_recipe>lwr_unf_recipe</in_recipe>
+        <out_commod>lwr_unf_cool</out_commod>
+        <out_recipe>lwr_unf_recipe</out_recipe>
+        <process_time>48</process_time>
+        <!-- need commodity production section? -->
       </CommodconverterFacility>
     </config>
-    <incommodity>lwr_unf</incommodity>
-    <outcommodity>lwr_unf_fuel</outcommodity>
   </facility>
 
   <facility>
     <name>SFRWetStorage</name>
     <config>
       <CommodconverterFacility>
-        <commod_pair>
-          <incommodity>sfr_unf</incommodity>
-          <inrecipe>sfr_unf_recipe</inrecipe>
-          <outcommodity>sfr_unf_cool</outcommodity>
-          <outrecipe>sfr_unf_recipe</outrecipe>
-        </commod_pair>
-        <processtime>12</processtime>
-        <commodity_production>
-          <commodity>sfr_unf_cool</commodity>
-          <capacity>1000.0</capacity>
-          <cost>0.0</cost>
-        </commodity_production>
+        <in_commod>sfr_unf</in_commod>
+        <in_recipe>sfr_unf_recipe</in_recipe>
+        <out_commod>sfr_unf_cool</out_commod>
+        <out_recipe>sfr_unf_recipe</out_recipe>
+        <process_time>12</process_time>
+        <!-- need commodity production section? -->
       </CommodconverterFacility>
     </config>
-    <incommodity>sfr_unf</incommodity>
-    <outcommodity>sfr_unf_fuel</outcommodity>
   </facility>
 
   <facility>
