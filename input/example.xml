@@ -37,6 +37,11 @@
       <lib>CommodconverterFacility</lib>
       <name>CommodconverterFacility</name>
     </spec>
+    <spec>
+      <path>separationmatrix</path>
+      <lib>SeparationmatrixFacility</lib>
+      <name>SeparationmatrixFacility</name>
+    </spec>
   </archetypes>
 
   <facility>
@@ -180,30 +185,32 @@
   <facility>
     <name>LWRSeparations</name>
     <config>
-      <SeparationsFac>
-        <inpair>
-          <incommodity>lwr_unf_cool</incommodity>
-          <inrecipe>lwr_unf_recipe</inrecipe>
-        </inpair>
-        <outpair>
-          <outcommodity>rep_lwr_tru</outcommodity>
-          <outrecipe>rep_lwr_tru_recipe</outrecipe>
-        </outpair>
-        <outpair>
-          <outcommodity>rep_lwr_u</outcommodity>
-          <outrecipe>rep_lwr_u_recipe</outrecipe>
-        </outpair>
-        <processtime>0</processtime>
-        <capacity>2000000</capacity>
-        <commodity_production>
-          <commodity>rep_lwr_u</commodity>
-          <capacity>1000.0</capacity>
-          <cost>0.0</cost>
-        </commodity_production>
-      </SeparationsFac>
+      <SeparationmatrixFacility>
+        <in_commod>lwr_unf_cool</in_commod>
+        <out_commods>
+          <val>rep_lwr_tru</val>
+          <val>rep_lwr_u</val>
+        </out_commods>
+        <elems>
+          <val>92</val>
+          <val>94</val>
+          <val>95</val>
+        </elems>
+        <effs>
+          <val>92</val>
+          <val>94</val>
+          <val>95</val>
+        </effs>
+        <streams>
+          <val>rep_lwr_u</val>
+          <val>rep_lwr_tru</val>
+          <val>rep_lwr_tru</val>
+        </streams>
+        <process_time>0</process_time>
+        <max_inv_size>2000000</max_inv_size>
+        <!-- need commodity production section? -->
+      </SeparationmatrixFacility>
     </config>
-    <incommodity>lwr_unf</incommodity>
-    <outcommodity>lwr_unf_fuel</outcommodity>
   </facility>
 
   <facility>
