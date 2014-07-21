@@ -6,9 +6,28 @@
   </control>
 
   <archetypes>
-    <spec><lib>cycamore</lib><name>Source</name></spec>
-    <spec><lib>cycamore</lib><name>GrowthRegion</name></spec>
-    <spec><path>decomm</path><lib>DecommInst</lib><name>DecommInst</name></spec>
+    <spec>
+      <lib>cycamore</lib>
+      <name>Source</name>
+    </spec>
+    <spec>
+      <lib>cycamore</lib>
+      <name>EnrichmentFacility</name>
+    </spec>
+    <spec>
+      <lib>cycamore</lib>
+      <name>GrowthRegion</name>
+    </spec>
+    <spec>
+      <path>decomm</path>
+      <lib>DecommInst</lib>
+      <name>DecommInst</name>
+    </spec>
+    <spec>
+      <path>commodconverter</path>
+      <lib>CommodconverterFacility</lib>
+      <name>CommodconverterFacility</name>
+    </spec>
   </archetypes>
 
   <facility>
@@ -17,28 +36,21 @@
       <Source>
         <out_commod>nat_u</out_commod>
         <recipe_name>nat_u_recipe</recipe_name>
-        <output_capacity>200000</output_capacity>
+        <capacity>200000</capacity>
       </Source>
     </config>
-    <outcommodity>nat_u</outcommodity>
   </facility>
 
   <facility>
     <name>Enrichment</name>
     <config>
       <EnrichmentFacility>
-        <input>
-          <incommodity>nat_u</incommodity>
-          <inrecipe>nat_u_recipe</inrecipe>
-        </input>
-        <output>
-          <outcommodity>leu</outcommodity>
-          <tails_assay>0.0025</tails_assay>
-        </output>
+        <in_commod>nat_u</in_commod>
+        <in_recipe>nat_u_recipe</in_recipe>
+        <out_commod>leu</out_commod>
+        <tails_assay>0.0025</tails_assay>
       </EnrichmentFacility>
     </config>
-    <incommodity>nat_u</incommodity>
-    <outcommodity>leu</outcommodity>
   </facility>
 
   <facility>
@@ -60,8 +72,6 @@
         </commodity_production>
       </CommodConverter>
     </config>
-    <incommodity>leu</incommodity>
-    <outcommodity>fresh_lwr_fuel</outcommodity>
   </facility>
 
   <facility>
