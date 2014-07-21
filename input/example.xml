@@ -101,9 +101,7 @@
   </region>
 
 
-
-
-e>
+  <recipe>
     <name>nat_u_recipe</name>
     <basis>mass</basis>
     <isotope>
@@ -252,3 +250,5 @@ e>
     </isotope>
   </recipe>
 
+
+</simulation>
