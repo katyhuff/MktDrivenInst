@@ -102,6 +102,19 @@
           <val>dep_u_recipe</val>
         </in_recipes>
         <!-- need preflist here and in streamblender asap -->
+        <isos>
+          <val>94240</val>
+          <val>94240</val>
+          <val>92235</val>
+          <val>92235</val>
+          <val>92235</val>
+        </isos>
+        <sources>
+          <val>rep_sfr_tru</val>
+          <val>rep_lwr_tru</val>
+          <val>rep_sfr_u</val>
+          <val>dep_u</val>
+        </sources>
         <process_time>12</process_time>
         <max_inv_size>100.0</max_inv_size>
         <!-- need commodity production? -->
