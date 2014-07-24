@@ -11,6 +11,7 @@ MktDrivenInst::MktDrivenInst(cyclus::Context* ctx)
     amt_req(0),
     n_built(0) {
     //  sdmanager_ = cyclus::toolkit::SupplyDemandManager(); 
+    cyclus::Warn<cyclus::EXPERIMENTAL_WARNING>("the Market Driven Institution is experimental."); 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
