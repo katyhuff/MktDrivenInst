@@ -1,9 +1,9 @@
-#include "decomm_inst.h"
+#include "mktdriveninst.h"
 
-using decomm::DecommInst;
+using mktdriveninst::MktDrivenInst;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-DecommInst::DecommInst(cyclus::Context* ctx)
+MktDrivenInst::MktDrivenInst(cyclus::Context* ctx)
     : cyclus::Institution(ctx),
     target_commod(""),
     target_fac(""),
@@ -14,17 +14,17 @@ DecommInst::DecommInst(cyclus::Context* ctx)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-DecommInst::~DecommInst() {}
+MktDrivenInst::~MktDrivenInst() {}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Tick(){
+void MktDrivenInst::Tick(){
   using cyclus::toolkit::Commodity;
  
   Commodity commod = Commodity(target_commod);
 
   double mat_avail = MaterialAvailable(commod);
 
-  LOG(cyclus::LEV_INFO3, "DcmIst") << "DecommInst: " << prototype()
+  LOG(cyclus::LEV_INFO3, "DcmIst") << "MktDrivenInst: " << prototype()
                                  << " at time: " << context()->time()
                                  << " has the following values regarding "
                                  << " commodity: " << target_commod;
@@ -43,7 +43,7 @@ void DecommInst::Tick(){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::EnterNotify(){
+void MktDrivenInst::EnterNotify(){
   /// enter the simulation and register any children present
   cyclus::Institution::EnterNotify();
   std::set<cyclus::Agent*>::iterator it;
@@ -56,24 +56,24 @@ void DecommInst::EnterNotify(){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::BuildNotify(Agent* m){
+void MktDrivenInst::BuildNotify(Agent* m){
   /// register a new child
   Register_(m);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::DecomNotify(Agent* m){
-  /// unregister a decommissioned child
+void MktDrivenInst::DecomNotify(Agent* m){
+  /// unregister a mktdriveninstissioned child
   Unregister_(m);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Decommission(Agent* to_decomm) {
-  context()->SchedDecom(to_decomm, context()->time() + 1);
+void MktDrivenInst::Decommission(Agent* to_mktdriveninst) {
+  context()->SchedDecom(to_mktdriveninst, context()->time() + 1);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Decommission(int n){
+void MktDrivenInst::Decommission(int n){
   n = abs(n);
   std::set<cyclus::Agent*>::iterator next;
   for (int i = 0; i < n; ++i ){
@@ -83,14 +83,14 @@ void DecommInst::Decommission(int n){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Build(int n) {
+void MktDrivenInst::Build(int n) {
   for( int i = 0; i != n; ++i ){
     context()->SchedBuild(this, target_fac, context()->time() + 1);
   }
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-int DecommInst::NToBuild(double avail) {
+int MktDrivenInst::NToBuild(double avail) {
   // convert material availability to a number of facilities to build.
   int n = 0;
   if (DecisionLogic(avail)) {
@@ -102,7 +102,7 @@ int DecommInst::NToBuild(double avail) {
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
+double MktDrivenInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
   // use the commodityproducermanager to determine material available
   double amt = 0;
   double demand = n_built*amt_req;
@@ -112,7 +112,7 @@ double DecommInst::MaterialAvailable(cyclus::toolkit::Commodity commod){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Register_(cyclus::Agent* agent){
+void MktDrivenInst::Register_(cyclus::Agent* agent){
   /// register a child
   using cyclus::toolkit::CommodityProducerManager;
   using cyclus::toolkit::Builder;
@@ -136,7 +136,7 @@ void DecommInst::Register_(cyclus::Agent* agent){
     buildmanager_.Register(b_cast);
   }
 
-  // if it's one of the facilities to decommision, register that
+  // if it's one of the facilities to mktdriveninstision, register that
   cyclus::Facility* fac_cast = dynamic_cast<cyclus::Facility*>(agent);
   if (fac_cast != NULL && agent->prototype() == target_fac) {
     LOG(cyclus::LEV_INFO3, "DcmIst") << "Registering agent "
@@ -148,7 +148,7 @@ void DecommInst::Register_(cyclus::Agent* agent){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void DecommInst::Unregister_(cyclus::Agent* agent){
+void MktDrivenInst::Unregister_(cyclus::Agent* agent){
 /// unregister a child
   using cyclus::toolkit::CommodityProducerManager;
   using cyclus::toolkit::Builder;
@@ -171,7 +171,7 @@ void DecommInst::Unregister_(cyclus::Agent* agent){
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-bool DecommInst::DecisionLogic(double avail){
+bool MktDrivenInst::DecisionLogic(double avail){
   bool d = false;
   if( avail >= amt_req) {
     d = true;
@@ -179,6 +179,6 @@ bool DecommInst::DecisionLogic(double avail){
   return d;
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-extern "C" cyclus::Agent* ConstructDecommInst(cyclus::Context* ctx) {
-  return new DecommInst(ctx);
+extern "C" cyclus::Agent* ConstructMktDrivenInst(cyclus::Context* ctx) {
+  return new MktDrivenInst(ctx);
 }

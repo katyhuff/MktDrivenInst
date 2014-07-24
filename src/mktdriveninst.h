@@ -1,25 +1,25 @@
-#ifndef CYCLUS_DECOMMS_DECOMM_INST_H_
-#define CYCLUS_DECOMMS_DECOMM_INST_H_
+#ifndef CYCLUS_MKTDRIVEN_MKTDRIVENINST_H_
+#define CYCLUS_MKTDRIVEN_MKTDRIVENINST_H_
 
 #include <string>
 
 #include "cyclus.h"
 
-namespace decomm {
+namespace mktdriveninst {
 
 typedef std::map<int, std::vector<std::string> > DecommSched;
-/// @class DecommInst
+/// @class MktDrivenInst
 ///
-/// This Institution is specifically designed for market-driven decommissioning
+/// This Institution is specifically designed for market-driven mktdriveninstissioning
 /// of reactors. It utlizes manager mixin classes to assist in this task. It was
 /// created for the specific purpose of runing the fco code-to-code comparison.
 /// However, it was designed to be sufficiently generic for general use.
 /// 
-/// The DecommInst class inherits from the Institution class and is dynamically
+/// The MktDrivenInst class inherits from the Institution class and is dynamically
 /// loaded by the Agent class when requested.
 ///
 /// @section intro Introduction
-/// The DecommInst decommissions facilities of a particular type if and when a
+/// The MktDrivenInst mktdriveninstissions facilities of a particular type if and when a
 /// material criteria occurs in the markets.
 ///
 /// @section agentparams Agent Parameters
@@ -33,15 +33,15 @@ typedef std::map<int, std::vector<std::string> > DecommSched;
 /// Place a description of the detailed behavior of the agent. Consider
 /// describing the behavior at the tick and tock as well as the behavior
 /// upon sending and receiving materials and messages.
-class DecommInst : public cyclus::Institution,
+class MktDrivenInst : public cyclus::Institution,
   public cyclus::toolkit::CommodityProducerManager,
   public cyclus::toolkit::Builder {
  public:
   /// Default constructor
-  DecommInst(cyclus::Context* ctx);
+  MktDrivenInst(cyclus::Context* ctx);
 
   /// every agent should be destructable
-  virtual ~DecommInst();
+  virtual ~MktDrivenInst();
 
   /// The Prime Directive
   /// Generates code that handles all input file reading and restart operations
@@ -53,13 +53,13 @@ class DecommInst : public cyclus::Institution,
 
 
   #pragma cyclus note {"doc": "An institution that owns, and operates facilities "\
-                              "decommissioning them based on a material "\
+                              "mktdriveninstissioning them based on a material "\
                                "availability rule in the input file."}
 
   /// on the tick, the institution checks the supply and demand
   /// of the target commodity. Then, based on the decision logic,
   /// determines the number of facilities that need to have been 
-  /// built/decommissioned 
+  /// built/mktdriveninstissioned 
   virtual void Tick();
 
   /// enter the simulation and register any children present
@@ -71,10 +71,10 @@ class DecommInst : public cyclus::Institution,
   /// unregister a child
   virtual void DecomNotify(Agent* m);
   
-  /// decommission a child
+  /// mktdriveninstission a child
   void Decommission(Agent* m);
 
-  /// decommission a number of children
+  /// mktdriveninstission a number of children
   void Decommission(int n);
 
   /// schedule the builds for a number of children
@@ -114,7 +114,7 @@ class DecommInst : public cyclus::Institution,
   /// unregister a child
   void Unregister_(cyclus::Agent* agent);
 
-  /// a list of target facilities that can be decommissioned by this inst
+  /// a list of target facilities that can be mktdriveninstissioned by this inst
   std::set<cyclus::Agent*> target_facs;
 
   /// manager for building things
@@ -125,19 +125,19 @@ class DecommInst : public cyclus::Institution,
 
   int n_built;
 
-  #pragma cyclus var {"tooltip": "facility prototype to build or decommission", \
-                      "doc": "a facility to be built or decommissioned " \
+  #pragma cyclus var {"tooltip": "facility prototype to build or mktdriveninstission", \
+                      "doc": "a facility to be built or mktdriveninstissioned " \
                       "based on decision logic"}
   std::string target_fac;
 
   #pragma cyclus var {"tooltip": "number of facilities to build (negative "\
-                      "to decommision)", \
-                      "doc": "number of facilities to build/decomm at a time."}
+                      "to mktdriveninstision)", \
+                      "doc": "number of facilities to build/mktdriveninst at a time."}
   int num_to_build;
 
   #pragma cyclus var {"tooltip": "the commodity on which to base the logic", \
                       "doc": "The commodity for which supply/demand determines "\
-                      "builds/decommissionings."}
+                      "builds/mktdriveninstissionings."}
   std::string target_commod;
 
   #pragma cyclus var {"tooltip": "facility prototypes", \
@@ -149,12 +149,12 @@ class DecommInst : public cyclus::Institution,
                       "doc": "Amount required for decision logic"}
   double amt_req;
 
-  friend class DecommInstTest;
+  friend class MktDrivenInstTest;
 
 };
 
-}  // namespace decomm
+}  // namespace mktdriveninst
 
-#endif  // CYCLUS_DECOMMS_DECOMM_INST_H_
+#endif  // CYCLUS_MKTDRIVEN_MKTDRIVENINST_INST_H_
 
 
