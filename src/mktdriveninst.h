@@ -10,16 +10,17 @@ namespace mktdriveninst {
 typedef std::map<int, std::vector<std::string> > DecommSched;
 /// @class MktDrivenInst
 ///
-/// This Institution is specifically designed for market-driven mktdriveninstissioning
-/// of reactors. It utlizes manager mixin classes to assist in this task. It was
-/// created for the specific purpose of runing the fco code-to-code comparison.
-/// However, it was designed to be sufficiently generic for general use.
+/// This Institution is specifically designed for market-driven 
+/// building/decommissioning of facilities. It utlizes manager mixin classes to 
+/// assist in this task, and was created for the specific purpose of runing the 
+/// fco code-to-code comparison. However, it was designed to be sufficiently 
+/// generic for general use.
 /// 
 /// The MktDrivenInst class inherits from the Institution class and is dynamically
 /// loaded by the Agent class when requested.
 ///
 /// @section intro Introduction
-/// The MktDrivenInst mktdriveninstissions facilities of a particular type if and when a
+/// The MktDrivenInst builds/decommissions facilities of a particular type if and when a
 /// material criteria occurs in the markets.
 ///
 /// @section agentparams Agent Parameters
@@ -53,7 +54,7 @@ class MktDrivenInst : public cyclus::Institution,
 
 
   #pragma cyclus note {"doc": "An institution that owns, and operates facilities "\
-                              "mktdriveninstissioning them based on a material "\
+                              "decommissioning them based on a material "\
                                "availability rule in the input file."}
 
   /// on the tick, the institution checks the supply and demand
@@ -137,7 +138,7 @@ class MktDrivenInst : public cyclus::Institution,
 
   #pragma cyclus var {"tooltip": "the commodity on which to base the logic", \
                       "doc": "The commodity for which supply/demand determines "\
-                      "builds/mktdriveninstissionings."}
+                      "builds/decommissionings."}
   std::string target_commod;
 
   #pragma cyclus var {"tooltip": "facility prototypes", \

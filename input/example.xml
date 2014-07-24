@@ -40,7 +40,7 @@
     <spec>
       <path>separationmatrix</path>
       <lib>SeparationMatrix</lib>
-      <name>Separationmatrix</name>
+      <name>SeparationMatrix</name>
     </spec>
   </archetypes>
 
@@ -70,21 +70,21 @@
   <facility>
     <name>LWRFuelFab</name>
     <config>
-      <CommodconverterFacility>
+      <CommodConverter>
         <in_commod>leu</in_commod>
         <in_recipe>leu_recipe</in_recipe>
         <out_commod>fresh_lwr_fuel</out_commod>
         <out_recipe>fresh_lwr_fuel_recipe</out_recipe>
         <process_time>12</process_time>
         <max_inv_size>100.0</max_inv_size>
-      </CommodconverterFacility>
+      </CommodConverter>
     </config>
   </facility>
 
   <facility>
     <name>SFRFuelFab</name>
     <config>
-      <StreamblenderFacility>
+      <StreamBlender>
         <in_commods>
           <val>rep_sfr_tru</val>
           <val>rep_lwr_tru</val>
@@ -117,12 +117,13 @@
         <process_time>12</process_time>
         <max_inv_size>100.0</max_inv_size>
         <!-- need commodity production? -->
-      </StreamblenderFacility>
+      </StreamBlender>
     </config>
   </facility>
 
   <facility>
     <name>LWR</name>
+    <lifetime>100</lifetime>
     <config>
       <BatchReactor>
         <fuel>
@@ -145,7 +146,7 @@
 
   <facility>
     <name>SFR</name>
-    <lifetime>1</lifetime>
+    <lifetime>100</lifetime>
     <config>
       <BatchReactor>
         <fuel>
@@ -169,35 +170,35 @@
   <facility>
     <name>LWRWetStorage</name>
     <config>
-      <CommodconverterFacility>
+      <CommodConverter>
         <in_commod>lwr_unf</in_commod>
         <in_recipe>lwr_unf_recipe</in_recipe>
         <out_commod>lwr_unf_cool</out_commod>
         <out_recipe>lwr_unf_recipe</out_recipe>
         <process_time>48</process_time>
         <!-- need commodity production section? -->
-      </CommodconverterFacility>
+      </CommodConverter>
     </config>
   </facility>
 
   <facility>
     <name>SFRWetStorage</name>
     <config>
-      <CommodconverterFacility>
+      <CommodConverter>
         <in_commod>sfr_unf</in_commod>
         <in_recipe>sfr_unf_recipe</in_recipe>
         <out_commod>sfr_unf_cool</out_commod>
         <out_recipe>sfr_unf_recipe</out_recipe>
         <process_time>12</process_time>
         <!-- need commodity production section? -->
-      </CommodconverterFacility>
+      </CommodConverter>
     </config>
   </facility>
 
   <facility>
     <name>LWRSeparations</name>
     <config>
-      <SeparationmatrixFacility>
+      <SeparationMatrix>
         <in_commod>lwr_unf_cool</in_commod>
         <out_commods>
           <val>rep_lwr_tru</val>
@@ -221,14 +222,14 @@
         <process_time>0</process_time>
         <max_inv_size>2000000</max_inv_size>
         <!-- need commodity production section? -->
-      </SeparationmatrixFacility>
+      </SeparationMatrix>
     </config>
   </facility>
 
   <facility>
     <name>SFRSeparations</name>
     <config>
-      <SeparationmatrixFacility>
+      <SeparationMatrix>
         <in_commod>sfr_unf_cool</in_commod>
         <out_commods>
           <val>rep_sfr_tru</val>
@@ -252,7 +253,7 @@
         <process_time>0</process_time>
         <max_inv_size>2000000</max_inv_size>
         <!-- need commodity production section? -->
-      </SeparationmatrixFacility>
+      </SeparationMatrix>
     </config>
   </facility>
 
@@ -328,7 +329,7 @@
       </initialfacilitylist>
       <config>
         <MktDrivenInst>
-          <target_fac>SFRFuelFab</target_fac>
+          <target_fac>LWR</target_fac>
           <num_to_build>-3</num_to_build>
           <target_commod>fresh_sfr_fuel</target_commod>
           <amt_req>10.0</amt_req>

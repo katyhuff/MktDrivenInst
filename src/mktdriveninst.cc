@@ -63,13 +63,13 @@ void MktDrivenInst::BuildNotify(Agent* m){
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void MktDrivenInst::DecomNotify(Agent* m){
-  /// unregister a mktdriveninstissioned child
+  /// unregister a decommissioned child
   Unregister_(m);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void MktDrivenInst::Decommission(Agent* to_mktdriveninst) {
-  context()->SchedDecom(to_mktdriveninst, context()->time() + 1);
+void MktDrivenInst::Decommission(Agent* to_decomm) {
+  context()->SchedDecom(to_decomm, context()->time() + 1);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -136,7 +136,7 @@ void MktDrivenInst::Register_(cyclus::Agent* agent){
     buildmanager_.Register(b_cast);
   }
 
-  // if it's one of the facilities to mktdriveninstision, register that
+  // if it's one of the facilities to decommission, register that
   cyclus::Facility* fac_cast = dynamic_cast<cyclus::Facility*>(agent);
   if (fac_cast != NULL && agent->prototype() == target_fac) {
     LOG(cyclus::LEV_INFO3, "DcmIst") << "Registering agent "
