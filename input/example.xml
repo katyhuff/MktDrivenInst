@@ -123,7 +123,7 @@
 
   <facility>
     <name>LWR</name>
-    <lifetime>100</lifetime>
+    <lifetime>1200</lifetime>
     <config>
       <BatchReactor>
         <fuel>
@@ -146,7 +146,7 @@
 
   <facility>
     <name>SFR</name>
-    <lifetime>100</lifetime>
+    <lifetime>1200</lifetime>
     <config>
       <BatchReactor>
         <fuel>
