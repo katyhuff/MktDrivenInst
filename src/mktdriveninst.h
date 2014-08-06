@@ -76,22 +76,30 @@ class MktDrivenInst : public cyclus::Institution,
   /// unregister a child
   virtual void DecomNotify(Agent* m);
   
-  /// mktdriveninstission a child
+  /// Decommission a child right now
   void Decommission(Agent* m);
 
-  /// mktdriveninstission a number of children
+  /// Decommission a number of children right now
   void Decommission(int n);
 
-  /// schedule the builds for a number of children
+  /// schedule immediate builds for a number of children
+  /// @param n the number of children to build
   void Build(int n);
 
-  /// return the number to build based on availability
+  /// return the number to build based on target commodity availability
+  /// @param avail the market availability of the target commodity
+  /// @return n the number to build or decommission
   int NToBuild(double avail);
   
-  /// return the material available in the commodity of interest
+  /// return the amount available of the commodity of interest
+  /// @param commod the target commodity of interest
+  /// @return the amount of available target commodity
   double MaterialAvailable(cyclus::toolkit::Commodity commod);
 
   /// Conduct action based on rule?
+  /// @param material available of the target commodity
+  /// @return true if n builds/decommissions should be performed, false 
+  /// otherwise
   bool DecisionLogic(double avail);
   
   /// This is a manager that keeps track of supply and demand for the commodity
