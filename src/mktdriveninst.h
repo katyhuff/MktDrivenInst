@@ -24,11 +24,11 @@ typedef std::map<int, std::vector<std::string> > DecommSched;
 /// material criteria occurs in the markets.
 ///
 /// @section agentparams Agent Parameters
-/// The facilities that are governed by this institution
-/// the target facility to build or decommission
-/// the number to build or decommission when the logic is triggered
-/// the target commodity on which to base the logic
-/// the amount of the target commodity that will trigger the logic
+/// prototypes the facilities that are governed by this institution
+/// target_fac the target facility to build or decommission
+/// num_to_build the number to build or decommission when the logic is triggered
+/// target_commod the target commodity on which to base the logic
+/// amt_req the amount of the target commodity that will trigger the logic
 ///
 /// @section optionalparams Optional Parameters
 /// Place a description of the optional input parameters to define the
