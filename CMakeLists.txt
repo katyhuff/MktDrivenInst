@@ -31,7 +31,7 @@ SET( MARKETDRIVENINST_SOURCE_DIR ${CMAKE_SOURCE_DIR} )
 SET( MARKETDRIVENINST_BINARY_DIR ${CMAKE_BINARY_DIR} )
 
 # Direct doxygen here
-SET( MKTDRIVENINST_DOC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/doc )
+SET( MARKETDRIVENINST_DOC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/doc )
 
 # This makes all the libraries build as SHARED
 SET(BUILD_SHARED_LIBS true)
@@ -133,14 +133,14 @@ add_custom_target(uninstall
 ##############################################################################################
 
 # This is the directory that holds the doxygen doxyfile template (doxy.conf.in)
-SET(DOC_SOURCE_DIR "${MKTDRIVENINST_SOURCE_DIR}")
-SET(DOC_INPUT_DIR "${MKTDRIVENINST_DOC_DIR}")
+SET(DOC_SOURCE_DIR "${MARKETDRIVENINST_SOURCE_DIR}")
+SET(DOC_INPUT_DIR "${MARKETDRIVENINST_DOC_DIR}")
 SET(DOC_OUTPUT_DIR "${CMAKE_BINARY_DIR}/doc")
 
 # If doxygen exists, use the doc/CMakeLists.txt file for further instructions.
 FIND_PACKAGE(Doxygen)
 IF(DOXYGEN_FOUND)
-    ADD_SUBDIRECTORY("${MKTDRIVENINST_DOC_DIR}")
+    ADD_SUBDIRECTORY("${MARKETDRIVENINST_DOC_DIR}")
 ELSE(DOXYGEN_FOUND)
     MESSAGE(STATUS "WARNING: Doxygen not found - doc won't be created")
 ENDIF(DOXYGEN_FOUND)
