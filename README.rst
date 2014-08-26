@@ -1,4 +1,3 @@
-.. _MktDrivenInst:
 
 Market Driven Institution
 =========================
