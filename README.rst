@@ -1,4 +1,3 @@
-.. _mktdriveninst:
 
 Market Driven Institution
 =========================
@@ -8,20 +7,20 @@ with the Cyclus simulator.
 To use this library, first make sure that you have the dependencies installed,
 namely |Cyclus|, CMake, and a recent version of Python (2.7 or 3.3+).
 
-First, you need to get the ``mkdriveninst`` code.
-You can grab the mkdriveninst by using git to
-`clone the repository <https://github.com/katyhuff/mkdriveninst.git>`_
+First, you need to get the ``MktDrivenInst`` code.
+You can grab the MktDrivenInst by using git to
+`clone the repository <https://github.com/katyhuff/MktDrivenInst.git>`_
 
-**Getting mkdriveninst via git:**
+**Getting MktDrivenInst via git:**
 
 .. code-block:: bash
 
-    $ git clone https://github.com/katyhuff/mkdriveninst.git
-    $ cd mkdriveninst
+    $ git clone https://github.com/katyhuff/MktDrivenInst.git
+    $ cd MktDrivenInst
 
 ------------
 
-Now that we have the code, let's compile and install the ``mkdriveninst`` project.  This
+Now that we have the code, let's compile and install the ``MktDrivenInst`` project.  This
 is done with the install.py script.
 Where did you install Cyclus? If you used a ``$PREFIX`` for cyclus, use the same one here. I used ``../install``.
 
